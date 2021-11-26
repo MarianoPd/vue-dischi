@@ -26,8 +26,8 @@ export default {
     methods:{
     getApi(){
       axios.get(this.apiUrl)
-        .then( r => {
-          this.characters = r.data;
+        .then( response => {
+          this.characters = response.response;
           this.loaded = true;
         })
         .catch( e => {
@@ -35,13 +35,13 @@ export default {
         })
     }
     },
-    
+
     mounted(){
         this.getApi();
     }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>
