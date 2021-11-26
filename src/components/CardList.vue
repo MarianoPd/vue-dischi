@@ -1,7 +1,11 @@
 <template>
-  <div>
-      <Card/>
-  </div>
+  <div v-if="loaded" class="row" >
+      <Card
+        v-for="(album, index) in albums"
+        :key="index"
+        :album="album"
+      />
+    </div>
 </template>
 
 <script>
@@ -26,12 +30,12 @@ export default {
     methods:{
     getApi(){
       axios.get(this.apiUrl)
-        .then( response => {
-          this.characters = response.response;
+        .then( r => {
+          this.albums = r.data.response;
           this.loaded = true;
         })
         .catch( e => {
-          console.log(e);
+          console.log('errore axios',e);
         })
     }
     },
@@ -43,5 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+    div{
+        padding:80px 0 80px 0;
+    }
 </style>
