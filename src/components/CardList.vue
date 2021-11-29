@@ -5,18 +5,23 @@
         :key="index"
         :album="album"
       />
-    </div>
+  </div>
+  <div v-else>
+    <Loader />
+  </div>
 </template>
 
 <script>
 
 import axios from 'axios';
-import Card from './Card.vue'
+import Card from './Card.vue';
+import Loader from './Loader.vue';
 
 export default {
     name: 'CardList',
     components:{
         Card,
+        Loader,
     },
 
     data(){
