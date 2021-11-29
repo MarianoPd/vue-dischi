@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrapper">
-    <Header />
+    <Header @genre="setGenre"/>
     <div class="container">
       <Card-List/>
     </div>
@@ -17,6 +17,17 @@ export default {
   components: {
     Header,
     CardList,
+  },
+  data(){
+    return{
+      genre: '',
+    }
+  },
+  methods:{
+    setGenre(text){
+      this.genre = text;
+      console.log(this.genre);
+    }
   }
 }
 </script>
