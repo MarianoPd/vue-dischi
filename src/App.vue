@@ -1,8 +1,8 @@
 <template>
   <div class="main-wrapper">
-    <Header @genre="setGenre"/>
+    <Header @changeGenre="setGenre"/>
     <div class="container">
-      <Card-List/>
+      <Card-List :selectGenere="genre" />
     </div>
   </div>
 </template>
@@ -21,12 +21,13 @@ export default {
   data(){
     return{
       genre: '',
+      genres: [],
     }
   },
   methods:{
     setGenre(text){
       this.genre = text;
-      console.log(this.genre);
+      console.log('app', this.genre);
     }
   }
 }

@@ -2,30 +2,35 @@
   <div class="d-flex justify-content-between">
     <img src="../assets/img/Spotify_logo.png" alt="icon">
     <div>
-      <SelectGenre @genre="setGenre"/>
+      <select v-model="genre" @change="$emit('changeGenre', genre)">
+          <option value="" selected></option>
+          <option value="Rock">Rock</option>
+          <option value="Pop">Pop</option>
+          <option value="Jazz">Jazz</option>
+          <option value="Metal">Metal</option>
+          
+      </select>
     </div>
   </div>
 </template>
 
 <script>
-import SelectGenre from './SelectGenre.vue'
+
 export default {
     name: 'Header',
     components:{
-      SelectGenre,
+      
     },
     data(){
       return{
         genre: '',
+        genres: [],
       }
     },
     methods:{
-      setGenre(text){
-        this.genre = text;
-         
-        this.$emit('genre', this.genre);
-        console.log(this.genre);
-      }
+     
+
+      
     }
 }
 </script>
@@ -42,6 +47,10 @@ div{
         width: 45px;
         aspect-ratio: 1;
         margin-left: 20px;
+    }
+    select{
+        margin-right: 100px;
+        min-width: 150px;
     }
 }
 

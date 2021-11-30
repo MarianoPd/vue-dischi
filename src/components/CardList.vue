@@ -1,7 +1,7 @@
 <template>
   <div v-if="loaded" class="row" >
       <Card
-        v-for="(album, index) in albums"
+        v-for="(album, index) in filteredAlbums"
         :key="index"
         :album="album"
       />
@@ -24,13 +24,26 @@ export default {
         Card,
         Loader,
     },
+    props:{
+      selectGenere: String,
+    },
 
     data(){
         return{
             albums: [],
+            genres: [],
             loaded: false,
             apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
         }
+    },
+
+    computed:{
+      filteredAlbums(){
+        if(this.selectGenere === ''){
+          return this.albums;
+        }
+        return this.albums.filter(album => album.genre === this.selectGenere);
+      }
     },
 
     methods:{
