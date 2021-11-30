@@ -2,14 +2,14 @@
   <div class="d-flex justify-content-between">
     <img src="../assets/img/Spotify_logo.png" alt="icon">
     <div>
-      <select v-model="author" @change="changeByAuthor()">
+      <select v-model="author" @change="changeByAuthor()" id="byAutor">
           <option value="" selected>Select author</option>
           <option v-for="(auth, index) in authorsList"
             :key="index"
             :value="auth" >{{auth}}</option>
           
       </select>
-      <select v-model="genre" @change="changeByGenre()">
+      <select v-model="genre" @change="changeByGenre()" id="byGenre">
           <option value="" selected>Select genre</option>
           <option v-for="(genre, index) in genreList"
             :key="index"
@@ -32,7 +32,7 @@ export default {
       return{
         genre: '',
         author: '',
-        selection: 'author',
+        selection: 'genre',
       }
     },
     methods:{
@@ -40,12 +40,18 @@ export default {
         this.$emit('changeAuthor', this.author);
         this.selection = 'author';
         this.$emit('changeSelection', this.selection);
+        
       },
       changeByGenre(){
         this.$emit('changeGenre', this.genre);
         this.selection = 'genre';
         this.$emit('changeSelection', this.selection);
-      }
+      },
+      
+    },
+    mounted(){
+      this.$emit('changeSelection', this.selection);
+      
     }
 }
 </script>
