@@ -1,10 +1,12 @@
 <template>
   <div class="main-wrapper">
     <Header @changeGenre="setGenre" :genreList='genres' 
-            @changeAuthor="setAuthor" :authorsList='authors'/>
+            @changeAuthor="setAuthor" :authorsList='authors'
+            @changeSelection="setSelection"/>
     <div class="container">
       <Card-List :selectGenere="genre" @genresList='setGenresList'
-                :selectAuthor="author" @authorList='setAuthors' />
+                :selectAuthor="author" @authorList='setAuthors' 
+                :selectSelection="selection"/>
     </div>
   </div>
 </template>
@@ -26,6 +28,7 @@ export default {
       genres: [],
       author: '',
       authors: [],
+      selection:'',
     }
   },
   methods:{
@@ -43,6 +46,10 @@ export default {
     setAuthors(array){
       this.authors = array;
       console.log('app array authors', this.authors);
+    },
+    setSelection(text){
+      this.selection = text;
+      console.log('app array selection', this.selection);
     }
   }
 }

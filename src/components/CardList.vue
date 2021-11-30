@@ -1,7 +1,15 @@
 <template>
-  <div v-if="loaded" class="row" >
+  <div>
+    <div v-if="loaded && selectSelection === 'author'" class="row" >
       <Card
         v-for="(album, index) in filteredByAuthor"
+        :key="index"
+        :album="album"
+      />
+  </div>
+  <div v-if="loaded && selectSelection === 'genre'" class="row" >
+      <Card
+        v-for="(album, index) in filteredByGenre"
         :key="index"
         :album="album"
       />
@@ -9,6 +17,8 @@
   <div v-else>
     <Loader />
   </div>
+  </div>
+  
 </template>
 
 <script>
@@ -27,6 +37,7 @@ export default {
     props:{
       selectGenere: String,
       selectAuthor: String,
+      selectSelection: String,
     },
 
     data(){
