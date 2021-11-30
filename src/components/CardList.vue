@@ -52,6 +52,11 @@ export default {
         .then( r => {
           this.albums = r.data.response;
           this.loaded = true;
+          this.albums.forEach(album => {
+            if(!this.genres.includes(album.genre)) this.genres.push(album.genre);
+          });
+          console.log('cardList', this.genres );
+          this.$emit('genresList',this.genres);
         })
         .catch( e => {
           console.log('errore axios',e);
