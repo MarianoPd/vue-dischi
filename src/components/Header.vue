@@ -2,6 +2,13 @@
   <div class="d-flex justify-content-between">
     <img src="../assets/img/Spotify_logo.png" alt="icon">
     <div>
+      <select v-model="author" @change="$emit('changeAuthor', author)">
+          <option value="" selected>Select author</option>
+          <option v-for="(auth, index) in authorsList"
+            :key="index"
+            :value="auth" >{{auth}}</option>
+          
+      </select>
       <select v-model="genre" @change="$emit('changeGenre', genre)">
           <option value="" selected>Select genre</option>
           <option v-for="(genre, index) in genreList"
@@ -19,10 +26,12 @@ export default {
     name: 'Header',
     props:{
       genreList: Array,
+      authorsList: Array,
     },
     data(){
       return{
         genre: '',
+        author: '',
       }
     },
 }

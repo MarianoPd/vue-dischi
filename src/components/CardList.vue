@@ -1,7 +1,7 @@
 <template>
   <div v-if="loaded" class="row" >
       <Card
-        v-for="(album, index) in filteredAlbums"
+        v-for="(album, index) in filteredByAuthor"
         :key="index"
         :album="album"
       />
@@ -26,23 +26,27 @@ export default {
     },
     props:{
       selectGenere: String,
+      selectAuthor: String,
     },
 
     data(){
         return{
             albums: [],
             genres: [],
+            authors: [],
             loaded: false,
             apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
         }
     },
 
     computed:{
-      filteredAlbums(){
-        if(this.selectGenere === ''){
-          return this.albums;
-        }
+      filteredByGenre(){
+        if(this.selectGenere === '')return this.albums;
         return this.albums.filter(album => album.genre === this.selectGenere);
+      },
+      filteredByAuthor(){
+        if(this.selectAuthor === '') return this.albums;
+        return this.albums.filter(album => album.author === this.selectAuthor);
       }
     },
 
@@ -55,8 +59,12 @@ export default {
           this.albums.forEach(album => {
             if(!this.genres.includes(album.genre)) this.genres.push(album.genre);
           });
-          console.log('cardList', this.genres );
           this.$emit('genresList',this.genres);
+
+          this.albums.forEach(album =>{
+            if(!this.authors.includes(album.author)) this.authors.push(album.author);
+          });
+          this.$emit('authorList',this.authors);
         })
         .catch( e => {
           console.log('errore axios',e);
